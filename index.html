@@ -3,43 +3,382 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mano-GSM - Vente de Téléphones</title>
+    <title>Mano-GSM | Boutique Officielle Bénin</title>
+    <style>
+        /* Couleurs fondamentales du drapeau du Bénin 🇧🇯 */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        header {
+            background-color: #008751; /* VERT national */
+            color: white;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            background-color: #00663d;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            padding: 10px 0;
+            z-index: 1000;
+        }
+
+        .nav-links.active { display: flex; }
+
+        .nav-links a {
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            background-color: #fcd116; /* JAUNE national */
+            color: #111;
+        }
+
+        /* Menu Burger */
+        .burger {
+            display: block;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px;
+        }
+
+        /* Bannière d'accueil */
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #fcd116; /* JAUNE national */
+            color: #111;
+        }
+
+        .container {
+            padding: 30px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Vitrine des Produits */
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+        }
+
+        .produit {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 12px;
+            width: 280px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .badge-en-stock {
+            background-color: #008751; /* VERT */
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .badge-rupture {
+            background-color: #e8112d; /* ROUGE national */
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .prix-actuel {
+            color: #008751;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .btn-panier {
+            background-color: #008751;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .btn-panier:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Formulaires (Client, Admin, Avis) */
+        section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 40px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        /* Version Ordinateur */
+        @media screen and (min-width: 768px) {
+            .burger { display: none; }
+            .nav-links { display: flex; flex-direction: row; position: static; width: auto; background: none; }
+            .nav-links a { padding: 0 15px; }
+            .nav-links a:hover { background: none; color: #fcd116; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #111;
+            color: white;
+            margin-top: 50px;
+            border-top: 5px solid #e8112d; /* Liseré ROUGE */
+        }
+    </style>
 </head>
 <body>
 
     <header>
-        <h1>Mano-GSM</h1>
-        <p>Votre expert en vente de smartphones : iPhone, Galaxy Samsung, Tecno, Infinix et Xiaomi.</p>
+        <div class="navbar">
+            <div class="logo">Mano-GSM 🇧🇯</div>
+            <button class="burger" id="burgerBtn">
+                <div></div><div></div><div></div>
+            </button>
+            <nav class="nav-links" id="navLinks">
+                <a href="#boutique">Boutique</a>
+                <a href="#espace-client">Espace Client</a>
+                <a href="#espace-admin">Espace Admin</a>
+            </nav>
+        </div>
     </header>
 
-    <hr>
+    <div class="hero">
+        <h1>Mano-GSM Bénin</h1>
+        <p>Achat et vente de smartphones. Tarifs optimisés avec calcul de marge transparent de 5 %.</p>
+    </div>
 
-    <main>
-        <h2>Nos Smartphones Disponibles</h2>
+    <div class="container">
         
-        <div>
-            <h3>Apple</h3>
-            <p>Découvrez nos derniers iPhone disponibles au meilleur prix.</p>
-        </div>
+        <main id="boutique">
+            <h2 style="text-align: center; margin-bottom: 30px;">Nos Articles Disponibles</h2>
+            <div class="product-grid" id="productGrid">
+                </div>
+        </main>
 
-        <div>
-            <h3>Samsung</h3>
-            <p>La gamme Galaxy Samsung, des écrans incroyables et une puissance unique.</p>
-        </div>
+        <section id="espace-client">
+            <h2>Espace Client 👤</h2>
+            <form>
+                <label>Adresse Email :</label>
+                <input type="email" placeholder="exemple@gmail.com" required>
+                <br><br>
+                <label>Mot de passe :</label>
+                <input type="password" required>
+                <br><br>
+                <button type="submit" class="btn-panier" style="width: auto;">Se connecter</button>
+            </form>
+        </section>
 
-        <div>
-            <h3>Autres Marques</h3>
-            <p>Retrouvez également nos modèles performants des marques Xiaomi, Tecno et Infinix.</p>
-        </div>
-    </main>
+        <section id="commentaires">
+            <h2>Espace Commentaires & Avis 💬</h2>
+            <form>
+                <label>Votre Nom :</label>
+                <input type="text" placeholder="Ex: Koffi" required>
+                <br><br>
+                <label>Votre Avis :</label>
+                <textarea rows="4" placeholder="Donnez votre avis sur les services de Mano-GSM..." required></textarea>
+                <br><br>
+                <button type="submit" class="btn-panier" style="width: auto;">Publier l'avis</button>
+            </form>
+        </section>
 
-    <hr>
+        <section id="espace-admin" style="background-color: #fff9e6; border-left: 6px solid #fcd116;">
+            <h2>Espace Administrateur ⚙️</h2>
+            <p><em>Entrez le prix constaté sur le marché, l'application calculera et affichera automatiquement le prix public intégrant vos 5 % de marge.</em></p>
+            
+            <form id="adminForm">
+                <label>Nom du smartphone (Ex: iPhone 15 Pro) :</label>
+                <input type="text" id="adminNom" placeholder="Ex: iPhone 15 Pro" required>
+                <br><br>
+                
+                <label>Prix de base du marché / Prix d'achat (FCFA) :</label>
+                <input type="number" id="adminPrix" placeholder="Ex: 800000" required>
+                <br><br>
+
+                <label>Nom exact du fichier image (Ex: iphone15.jpg) :</label>
+                <input type="text" id="adminImage" placeholder="Ex: iphone15.jpg">
+                <br><br>
+                
+                <label><strong>État de disponibilité de l'article :</strong></label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="adminStock" value="disponible" checked> 
+                        <span style="color: #008751; font-weight: bold;">✅ En stock (Disponible)</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="adminStock" value="rupture"> 
+                        <span style="color: #e8112d; font-weight: bold;">❌ Rupture de stock</span>
+                    </label>
+                </div>
+                <br><br>
+
+                <button type="submit" class="btn-panier" style="background-color: #e8112d;">Valider et actualiser le catalogue</button>
+            </form>
+        </section>
+
+    </div>
 
     <footer>
-        <h2>Contactez-nous</h2>
-        <p>Pour toute commande ou information, contactez Mano-GSM.</p>
-        <p>&copy; 2026 Mano-GSM - Tous droits réservés.</p>
+        <p>&copy; 2026 Mano-GSM - Cotonou, Bénin - Tous droits réservés.</p>
     </footer>
 
+    <script>
+        // Gestion interactive du Menu Burger
+        const burgerBtn = document.getElementById('burgerBtn');
+        const navLinks = document.getElementById('navLinks');
+        burgerBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
+
+        // Données d'exemple pré-calculées avec +5%
+        const catalogueDeDepart = [
+            { nom: "iPhone 15 Pro", prix: 840000, statut: "disponible", image: "iphone15.jpg" },
+            { nom: "Samsung Galaxy S24", prix: 735000, statut: "disponible", image: "samsung-s24.jpg" }
+        ];
+
+        // Lecture du LocalStorage
+        let boutiqueStock = JSON.parse(localStorage.getItem('manoGsmFinalStock')) || catalogueDeDepart;
+
+        // Fonction d'affichage de la Vitrine
+        function rafraichirVitrine() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = "";
+
+            boutiqueStock.forEach(prod => {
+                let badge = "";
+                let boutonDesactive = "";
+
+                if (prod.statut === "rupture") {
+                    badge = <span class="badge-rupture">❌ Rupture de stock</span>;
+                    boutonDesactive = "disabled";
+                } else {
+                    badge = <span class="badge-en-stock">✅ Disponible</span>;
+                }
+
+                grid.innerHTML += `
+                    <div class="produit">
+                        <div>${badge}</div>
+                        <img src="${prod.image || 'placeholder.jpg'}" alt="${prod.nom}" width="100%" onerror="this.src='https://via.placeholder.com/200x200?text=Pas+d+image'">
+                        <h3>${prod.nom}</h3>
+                        <p><span class="prix-actuel">${Math.round(prod.prix).toLocaleString()} FCFA</span></p>
+                        <button class="btn-panier" ${boutonDesactive}>${prod.statut === 'rupture' ? 'Indisponible' : 'Ajouter au panier'}</button>
+                    </div>
+                `;
+            });
+        }
+
+        // Enregistrement Administrateur (Calcul de prix et statut manuel)
+        document.getElementById('adminForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const nom = document.getElementById('adminNom').value.trim();
+            const prixMarche = parseInt(document.getElementById('adminPrix').value);
+            
+            // Indexation automatique de la marge de 5%
+            const prixCalculé = prixMarche * 1.05;
+
+            const image = document.getElementById('adminImage').value.trim() || "placeholder.jpg";
+            const statut = document.querySelector('input[name="adminStock"]:checked').value;
+
+            const indexExistant = boutiqueStock.findIndex(p => p.nom.toLowerCase() === nom.toLowerCase());
+
+            if (indexExistant !== -1) {
+                // Modification d'un appareil existant
+                boutiqueStock[indexExistant].prix = prixCalculé;
+                boutiqueStock[indexExistant].statut = statut;
+                if(document.getElementById('adminImage').value.trim() !== "") {
+                    boutiqueStock[indexExistant].image = image;
+                }
+            } else {
+                // Création d'une nouvelle fiche produit
+                boutiqueStock.push({ nom, prix: prixCalculé, statut, image });
+            }
+
+            // Sauvegarde locale
+            localStorage.setItem('manoGsmFinalStock', JSON.stringify(boutiqueStock));
+
+            // Réinitialisation du formulaire admin
+            document.getElementById('adminForm').reset();
+            document.querySelector('input[value="disponible"]').checked = true;
+            
+            rafraichirVitrine();
+            alert("Mise à jour effectuée ! Marge de 5% appliquée de manière transparente.");
+        });
+
+        // Premier chargement de la page
+        rafraichirVitrine();
+    </script>
 </body>
 </html>
