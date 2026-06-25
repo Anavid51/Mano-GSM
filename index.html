@@ -3,420 +3,363 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mano-GSM | Boutique Officielle Bénin</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-    
+    <title>Mano_GSM - Boutique Officielle</title>
     <style>
-        /* --- DESIGN GLOBAL & COULEURS DU BÉNIN --- */
+        /* --- PALETTE DE COULEURS CHARTE FLYER --- */
         :root {
-            --vert-benin: #008751;
-            --jaune-benin: #fcd116;
-            --rouge-benin: #e8112d;
-            --noir-fond: #111;
-            --gris-clair: #f8f9fa;
+            --mano-green: #007A33;
+            --mano-yellow: #FFD100;
+            --mano-red: #E4002B;
+            --dark-color: #1a1a1a;
+            --light-bg: #f4f6f8;
         }
 
         body {
-            font-family: 'Lato', sans-serif;
-            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0; 
             padding: 0;
-            background-color: var(--gris-clair);
-            color: #333;
-            scroll-behavior: smooth;
+            background-color: var(--light-bg);
+            color: var(--dark-color);
         }
 
-        h1, h2, h3, .logo-text {
-            font-family: 'Poppins', sans-serif;
-        }
-
-        /* --- LOGO CSS MANO-GSM --- */
-        .logo-wrap {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: white;
-        }
-
-        .logo-icon {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, var(--vert-benin) 0%, var(--jaune-benin) 50%, var(--rouge-benin) 100%);
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-        }
-
-        .logo-icon::before {
-            content: '';
-            width: 20px;
-            height: 32px;
-            border: 2px solid white;
-            border-radius: 4px;
-        }
-
-        .logo-icon::after {
-            content: 'M';
-            position: absolute;
-            color: white;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .logo-text {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        /* --- NAVIGATION --- */
+        /* --- NAVIGATION & MENU BURGER --- */
         header {
-            background-color: var(--vert-benin);
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        .navbar {
+            background-color: white;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+            border-bottom: 4px solid var(--mano-green);
+            position: relative;
         }
 
-        .nav-links {
+        .logo { 
+            font-size: 1.8rem; 
+            font-weight: 900; 
+            display: flex; 
+            align-items: center; 
+        }
+        
+        .logo-m { 
+            background: linear-gradient(135deg, var(--mano-green), var(--mano-yellow), var(--mano-red)); 
+            color: white; 
+            padding: 2px 12px; 
+            border-radius: 8px; 
+            margin-right: 5px; 
+        }
+        
+        .logo-text { color: var(--dark-color); }
+
+        .nav-links { display: flex; gap: 1.5rem; }
+        .nav-links a { text-decoration: none; color: var(--dark-color); font-weight: bold; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--mano-green); }
+
+        .burger-menu {
             display: none;
             flex-direction: column;
-            width: 100%;
-            background-color: #00663d;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            padding: 15px 0;
-        }
-
-        .nav-links.active { display: flex; }
-
-        .nav-links a {
-            color: white;
-            padding: 12px 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            background-color: var(--jaune-benin);
-            color: #111;
-        }
-
-        .burger {
-            display: block;
-            cursor: pointer;
+            gap: 5px;
             background: none;
             border: none;
-        }
-
-        .burger div {
-            width: 28px;
-            height: 3px;
-            background-color: white;
-            margin: 6px;
-            border-radius: 2px;
-        }
-
-        /* --- SECTION ACCUEIL (HERO) --- */
-        .hero {
-            text-align: center;
-            padding: 60px 20px;
-            background-color: var(--jaune-benin);
-            color: #111;
-            clip-path: ellipse(150% 100% at 50% 0%);
-        }
-
-        .hero h1 { font-size: 2.5em; margin-bottom: 10px; }
-
-        /* --- VITRINE DES PRODUITS --- */
-        .container { padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            justify-items: center;
-        }
-
-        .produit {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-            text-align: center;
-            transition: 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 320px;
-        }
-
-        .produit:hover { transform: translateY(-8px); }
-
-        .img-container {
-            width: 100%;
-            height: 240px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: white;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-
-        .img-container img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        /* --- BADGES & PRIX --- */
-        .badge {
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 700;
-            margin-bottom: 15px;
-            display: inline-block;
-        }
-
-        .badge-stock { background-color: var(--vert-benin); color: white; }
-        .badge-rupture { background-color: var(--rouge-benin); color: white; }
-
-        .prix-actuel {
-            color: var(--vert-benin);
-            font-size: 1.5em;
-            font-weight: 700;
-        }
-
-        .btn-action {
-            background-color: var(--vert-benin);
-            color: white;
-            border: none;
-            padding: 14px;
-            width: 100%;
             cursor: pointer;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 1em;
-            margin-top: 15px;
-            transition: 0.3s;
+            padding: 5px;
         }
+        .burger-menu span { width: 25px; height: 3px; background-color: var(--dark-color); border-radius: 2px; }
 
-        .btn-action:hover { background-color: #00663d; }
-        .btn-action:disabled { background-color: #ccc; cursor: not-allowed; }
-
-        /* --- FORMULAIRES --- */
-        section {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin-top: 50px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 12px;
-            margin-top: 8px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-size: 1em;
-        }
-
-        .admin-box { border-left: 8px solid var(--jaune-benin); background-color: #fffdf5; }
-
-        /* --- RESPONSIVE & FOOTER --- */
-        @media screen and (min-width: 768px) {
-            .burger { display: none; }
-            .nav-links { display: flex; flex-direction: row; position: static; width: auto; background: none; }
-            .nav-links a { border-radius: 5px; }
-        }
-
-        footer {
+        /* --- HERO BANNER --- */
+        .hero-section {
             text-align: center;
-            padding: 40px 20px;
-            background: var(--noir-fond);
-            color: white;
-            margin-top: 60px;
-            border-top: 6px solid var(--rouge-benin);
+            padding: 3rem 1rem;
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1605787020600-b9ebd5df1d07?w=1200') no-repeat center/cover;
+            border-bottom: 2px solid #e2e8f0;
         }
+        .hero-section h1 { color: var(--mano-red); font-size: 2.2rem; margin-bottom: 0.5rem; }
+        .subtitle { font-size: 1.1rem; font-weight: 600; color: var(--mano-green); }
 
-        .dev-credit { margin-top: 20px; font-size: 0.9em; opacity: 0.7; }
-        .dev-credit strong { color: var(--jaune-benin); }
+        .search-box { margin-top: 1.5rem; }
+        .voice-btn {
+            background-color: var(--mano-green); color: white;
+            border: none; padding: 0.8rem 2rem; border-radius: 25px;
+            font-size: 1rem; font-weight: bold; cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s;
+        }
+        .voice-btn:hover { transform: scale(1.05); }
+
+        /* --- CARTES GARANTIES --- */
+        .features-container { display: flex; justify-content: center; gap: 1.5rem; padding: 2rem; flex-wrap: wrap; }
+        .feature-card { padding: 1rem 1.5rem; border-radius: 12px; color: white; text-align: center; font-weight: bold; min-width: 200px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .feature-card.green { background-color: var(--mano-green); }
+        .feature-card.yellow { background-color: #d4af37; color: black; }
+        .feature-card.red { background-color: var(--mano-red); }
+
+        /* --- GRILLE DE PRODUITS --- */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem; padding: 2rem; max-width: 1200px; margin: 0 auto;
+        }
+        .product-card {
+            background: white; border-radius: 12px; padding: 1.5rem;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.05); text-align: center;
+            border: 1px solid #e2e8f0; transition: transform 0.2s;
+        }
+        .product-card:hover { transform: translateY(-5px); }
+        .product-card img { max-width: 100%; height: 220px; object-fit: contain; margin-bottom: 1rem; border-radius: 4px; }
+        .product-card.rupture { opacity: 0.5; border-left: 5px solid var(--mano-red); }
+        .rupture-badge { color: var(--mano-red); font-weight: bold; display: block; margin-top: 0.5rem; }
+
+        /* --- PANEL ADMIN SÉCURISÉ --- */
+        .admin-panel { background: #fff; margin: 4rem auto; padding: 2rem; max-width: 500px; border-radius: 12px; border: 2px solid var(--mano-yellow); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        .admin-panel form { display: flex; flex-direction: column; gap: 1rem; }
+        .admin-panel label { font-weight: bold; }
+        .admin-panel input, .admin-panel select, .admin-panel button { padding: 0.7rem; font-size: 1rem; border-radius: 6px; border: 1px solid #ccc; }
+        .admin-panel button { background-color: var(--dark-color); color: white; border: none; cursor: pointer; font-weight: bold; }
+        .admin-panel button:hover { background-color: #333; }
+
+        /* --- PIED DE PAGE ET CRÉDITS --- */
+        footer { background-color: var(--dark-color); color: white; padding: 3rem 2rem 1.5rem 2rem; margin-top: 4rem; }
+        .footer-content { max-width: 1200px; margin: 0 auto; }
+        .shop-info h3 { color: var(--mano-yellow); font-size: 1.5rem; margin-top: 0; }
+        .shop-info p { margin: 0.5rem 0; line-height: 1.5; }
+        hr { border: 0; border-top: 1px solid #444; margin: 2rem 0; }
+        .dev-credits { text-align: center; font-size: 0.95rem; color: #e2e8f0; line-height: 1.6; }
+        .dev-credits strong { color: var(--mano-yellow); }
+        .dev-credits a { color: var(--mano-yellow); text-decoration: none; }
+        .dev-credits a:hover { text-decoration: underline; }
+
+        /* --- MEDIA QUERIES MOBILE --- */
+        @media (max-width: 768px) {
+            .burger-menu { display: flex; }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px; right: 20px;
+                background: white; padding: 1.5rem;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                border-radius: 8px; z-index: 100; gap: 1rem;
+            }
+            .nav-links.active { display: flex; }
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="navbar">
-            <a href="#" class="logo-wrap">
-                <div class="logo-icon"></div>
-                <div class="logo-text">MANO-GSM</div>
-            </a>
-            
-            <button class="burger" id="burgerBtn">
-                <div></div><div></div><div></div>
-            </button>
-
-            <nav class="nav-links" id="navLinks">
-                <a href="#boutique">Boutique</a>
-                <a href="#espace-client">Client</a>
-                <a href="#commentaires">Avis</a>
-                <a href="#espace-admin">Admin</a>
-            </nav>
+        <div class="logo">
+            <span class="logo-m">M</span><span class="logo-text">ano_GSM</span>
         </div>
+        
+        <button class="burger-menu" id="burgerMenu" aria-label="Ouvrir le menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="#boutique">Boutique</a>
+            <a href="#features">Garanties</a>
+            <a href="#admin-section">Espace Admin</a>
+        </nav>
     </header>
 
-    <div class="hero">
-        <h1>Qualité & Authenticité</h1>
-        <p>Votre partenaire mobile de confiance au Bénin. Classé par excellence.</p>
-    </div>
-
-    <div class="container">
+    <section class="hero-section">
+        <h1>NOUVELLE BOUTIQUE EN LIGNE OFFICIELLE !</h1>
+        <p class="subtitle">Authenticité & Qualité Garanties • Prix du marché en temps réel</p>
         
-        <main id="boutique">
-            <h2 style="text-align: center; margin-bottom: 40px;">Nos Smartphones Disponibles</h2>
-            <div class="product-grid" id="productGrid">
-                </div>
+        <div class="search-box">
+            <button id="voiceBtn" class="voice-btn">🎤 Activer la commande vocale</button>
+            <p id="voiceStatus">Cliquez sur le micro pour chercher un article par la voix...</p>
+        </div>
+    </section>
+
+    <section id="features" class="features-container">
+        <div class="feature-card green"><h3>Authenticité & Qualité Garanties</h3></div>
+        <div class="feature-card yellow"><h3>Prix du Marché en Temps Réel</h3></div>
+        <div class="feature-card red"><h3>Commande Facile 24h/24 & 7j/7</h3></div>
+    </section>
+
+    <main id="boutique" class="products-grid">
         </main>
 
-        <section id="espace-client">
-            <h2>Espace Client 👤</h2>
-            <form>
-                <input type="email" placeholder="votre@email.com" required>
-                <input type="password" placeholder="Mot de passe" required>
-                <button type="submit" class="btn-action" style="width: auto; padding-left: 40px; padding-right: 40px;">Se connecter</button>
-            </form>
-        </section>
+    <section id="admin-section" class="admin-panel">
+        <h2>🛠️ Espace Administrateur (Mano_GSM)</h2>
+        <p>Ajuster les prix en temps réel ou modifier les ruptures de stock :</p>
+        <form id="adminForm">
+            <label for="productSelect">Sélectionner l'article :</label>
+            <select id="productSelect"></select>
+            
+            <label for="newPrice">Nouveau Prix (FCFA) :</label>
+            <input type="number" id="newPrice" min="0" placeholder="Ex: 650000">
 
-        <section id="commentaires">
-            <h2>Avis de nos clients 💬</h2>
-            <form>
-                <input type="text" placeholder="Votre nom" required>
-                <textarea rows="4" placeholder="Qu'avez-vous pensé de Mano-GSM ?"></textarea>
-                <button type="submit" class="btn-action" style="width: auto; padding-left: 40px; padding-right: 40px;">Publier</button>
-            </form>
-        </section>
+            <label for="newStock">Statut du Stock :</label>
+            <select id="newStock">
+                <option value="Disponible">Disponible</option>
+                <option value="En rupture">En rupture</option>
+            </select>
 
-        <section id="espace-admin" class="admin-box">
-            <h2>Espace Administrateur ⚙️</h2>
-            <p>Mise à jour des stocks et des prix (Calcul auto de 5% de marge).</p>
-            <form id="adminForm">
-                <input type="text" id="adminNom" placeholder="Nom du téléphone (Ex: iPhone 15 Pro)" required>
-                <input type="number" id="adminPrix" placeholder="Prix du marché (FCFA)" required>
-                <input type="url" id="adminImage" placeholder="Lien (URL) de la photo réelle">
-                <input type="password" id="adminPassword" placeholder="Mot de passe Administrateur secret" required>
-                
-                <p style="margin-top: 15px; font-weight: bold;">Disponibilité :</p>
-                <label><input type="radio" name="adminStock" value="disponible" checked> Disponible</label>
-                <label style="margin-left: 20px;"><input type="radio" name="adminStock" value="rupture"> En rupture</label>
-                
-                <button type="submit" class="btn-action" style="background-color: var(--rouge-benin);">Mettre à jour le catalogue</button>
-            </form>
-        </section>
-
-    </div>
+            <button type="submit">Mettre à jour l'article</button>
+        </form>
+    </section>
 
     <footer>
-        <p><strong>Mano-GSM Bénin</strong></p>
-        <p>📍 Agla petit à petit 2 à droite, juste après le CEG ENTENTE, en face de l'église évangélique Péniel, Cotonou</p>
-        <div class="dev-credit">
-            Propulsé par <strong>Anael DESSOUASSI</strong> &copy; 2026
+        <div class="footer-content">
+            <div class="shop-info">
+                <h3>Mano_GSM</h3>
+                <p><strong>🌐 Site officiel :</strong> <a href="https://www.manogsm.com" style="color: var(--mano-yellow); text-decoration: none;">www.manogsm.com</a></p>
+                <p><strong>📞 Téléphone du site :</strong> +229 01 91 74 71 71</p>
+                <p><strong>🤵 Directeur du magasin :</strong> +229 01 91 14 11</p>
+                <p><strong>📍 Adresse :</strong> Agla petit à petit 2 à droite, juste après le CEG ENTENTE, en face de l'église évangélique Péniel, Cotonou.</p>
+            </div>
+            
+            <hr>
+            
+            <div class="dev-credits">
+                <p>Application conçue et développée par : <strong>Anael DESSOUASSI</strong></p>
+                <p>📞 <strong>Contact Dev :</strong> +229 01 40 10 93 06 | ✉️ <strong>Email :</strong> <a href="mailto:dessouassianael51@gmail.com">dessouassianael51@gmail.com</a></p>
+                <p style="font-size: 0.8rem; margin-top: 10px; color: #888;">&copy; 2026 Mano_GSM - Tous droits réservés.</p>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Menu Burger
-        const burgerBtn = document.getElementById('burgerBtn');
-        const navLinks = document.getElementById('navLinks');
-        burgerBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
+        // --- BASE DE DONNÉES COMPLÈTE CORRIGÉE ---
+        let articles = [
+            // Standard iPhones
+            { id: 1, nom: "iPhone 11", categorie: "telephone apple iphone", prix: 280000, statut: "Disponible", image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=500" },
+            { id: 2, nom: "iPhone 12", categorie: "telephone apple iphone", prix: 370000, statut: "Disponible", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500" },
+            { id: 3, nom: "iPhone 13", categorie: "telephone apple iphone", prix: 450000, statut: "Disponible", image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=500" },
+            { id: 4, nom: "iPhone 14", categorie: "telephone apple iphone", prix: 540000, statut: "Disponible", image: "https://images.unsplash.com/photo-1605787020600-b9ebd5df1d07?w=500" },
+            { id: 5, nom: "iPhone 16", categorie: "telephone apple iphone", prix: 780000, statut: "Disponible", image: "https://images.unsplash.com/photo-1605787020600-b9ebd5df1d07?w=500" },
+            
+            // iPhones Pro
+            { id: 6, nom: "iPhone 11 Pro", categorie: "telephone apple iphone pro", prix: 340000, statut: "Disponible", image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=500" },
+            { id: 7, nom: "iPhone 12 Pro", categorie: "telephone apple iphone pro", prix: 440000, statut: "Disponible", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500" },
+            { id: 8, nom: "iPhone 13 Pro", categorie: "telephone apple iphone pro", prix: 530000, statut: "Disponible", image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=500" },
+            { id: 9, nom: "iPhone 14 Pro", categorie: "telephone apple iphone pro", prix: 640000, statut: "Disponible", image: "https://images.unsplash.com/photo-1605787020600-b9ebd5df1d07?w=500" },
+            { id: 10, nom: "iPhone 15 Pro", categorie: "telephone apple iphone pro", prix: 750000, statut: "Disponible", image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=500" },
+            { id: 11, nom: "iPhone 16 Pro", categorie: "telephone apple iphone pro", prix: 940000, statut: "Disponible", image: "https://images.unsplash.com/photo-1605787020600-b9ebd5df1d07?w=500" },
+            
+            // Sonorisation / Sonos
+            { id: 12, nom: "Sonos Era 100", categorie: "son audio sono sonos enceinte", prix: 190000, statut: "Disponible", image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=500" },
+            { id: 13, nom: "Sonos Move 2 Portable", categorie: "son audio sono sonos enceinte", prix: 320000, statut: "Disponible", image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=500" },
+            { id: 14, nom: "Barre de Son Sonos Arc", categorie: "son audio sono sonos enceinte barre", prix: 650000, statut: "Disponible", image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=500" },
 
-        // Données initiales
-        const initStock = [
-            { nom: "Samsung Galaxy S24", prix: 735000, statut: "disponible", image: "https://images.samsung.com/is/image/samsung/p6pim/fr/2401/gallery/fr-galaxy-s24-sm-s921bzyeexef-539423604" },
-            { nom: "iPhone 15 Pro", prix: 840000, statut: "disponible", image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-1inch-naturaltitanium?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692846360186" }
+            // Chemises, Pantalons, Vêtements de marque
+            { id: 15, nom: "Chemise Zara Slim-Fit", categorie: "habit chemises vetements marque zara", prix: 18000, statut: "Disponible", image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500" },
+            { id: 16, nom: "Chemise en Soie Gucci Luxe", categorie: "habit chemises vetements marque luxe gucci", prix: 95000, statut: "Disponible", image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500" },
+            { id: 17, nom: "Pantalon Chino Levi's Classique", categorie: "habit pantalons vetements marque levis", prix: 32000, statut: "Disponible", image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=500" },
+            { id: 18, nom: "Pantalon Cargo Louis Vuitton", categorie: "habit pantalons vetements marque luxe vuitton", prix: 140000, statut: "Disponible", image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=500" },
+
+            // Chaussures & Chaussures de marque
+            { id: 19, nom: "Sneakers Nike Air Force 1", categorie: "chaussures marque nike basket", prix: 65000, statut: "Disponible", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" },
+            { id: 20, nom: "Adidas UltraBoost Run", categorie: "chaussures marque adidas basket sport", prix: 80000, statut: "Disponible", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" },
+            { id: 21, nom: "Mocassins en cuir Prada", categorie: "chaussures marque luxe prada", prix: 120000, statut: "En rupture", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" }
         ];
 
-        let boutiqueStock = JSON.parse(localStorage.getItem('manoGsmV3')) || initStock;
-
-        function refreshUI() {
-            const grid = document.getElementById('productGrid');
-            grid.innerHTML = "";
-
-            // Tri du moins cher au plus cher
-            boutiqueStock.sort((a, b) => a.prix - b.prix);
-
-            boutiqueStock.forEach(p => {
-                const isRupture = p.statut === "rupture";
-                const badgeClass = isRupture ? "badge-rupture" : "badge-stock";
-                const badgeText = isRupture ? "Rupture de stock" : "En Stock";
-                
-                grid.innerHTML += `
-                    <div class="produit">
-                        <div>
-                            <span class="badge ${badgeClass}">${badgeText}</span>
-                            <div class="img-container">
-                                <img src="${p.image || 'https://via.placeholder.com/240'}" alt="${p.nom}">
-                            </div>
-                            <h3>${p.nom}</h3>
-                        </div>
-                        <div>
-                            <p class="prix-actuel">${Math.round(p.prix).toLocaleString()} FCFA</p>
-                            <button class="btn-action" ${isRupture ? 'disabled' : ''}>
-                                ${isRupture ? 'Indisponible' : 'Commander'}
-                            </button>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        document.getElementById('adminForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            if(document.getElementById('adminPassword').value !== "Anael2009") {
-                alert("Mot de passe incorrect !");
+        // --- FONCTION DE RENDU ---
+        function afficherArticles(liste = articles) {
+            const boutique = document.getElementById('boutique');
+            boutique.innerHTML = "";
+            
+            if (liste.length === 0) {
+                boutique.innerHTML = "<p style='grid-column: 1/-1; text-align: center; font-weight: bold; padding: 2rem;'>Aucun article ne correspond à cette recherche.</p>";
                 return;
             }
 
-            const nom = document.getElementById('adminNom').value.trim();
-            const prixCalcul = parseInt(document.getElementById('adminPrix').value) * 1.05;
-            const img = document.getElementById('adminImage').value.trim();
-            const stat = document.querySelector('input[name="adminStock"]:checked').value;
+            liste.forEach(art => {
+                const card = document.createElement('div');
+                card.className = product-card ${art.statut === 'En rupture' ? 'rupture' : ''};
+                card.innerHTML = `
+                    <img src="${art.image}" alt="${art.nom}">
+                    <h3>${art.nom}</h3>
+                    <p>Prix : <strong style="color:var(--mano-green)">${art.prix.toLocaleString()} FCFA</strong></p>
+                    <p>${art.statut === 'En rupture' ? '<span class="rupture-badge">🔴 En Rupture</span>' : '✅ En Stock'}</p>
+                `;
+                boutique.appendChild(card);
+            });
+        }
 
-            const idx = boutiqueStock.findIndex(x => x.nom.toLowerCase() === nom.toLowerCase());
-            if(idx !== -1) {
-                boutiqueStock[idx] = { nom, prix: prixCalcul, statut: stat, image: img || boutiqueStock[idx].image };
-            } else {
-                boutiqueStock.push({ nom, prix: prixCalcul, statut: stat, image: img });
-            }
-
-            localStorage.setItem('manoGsmV3', JSON.stringify(boutiqueStock));
-            this.reset();
-            refreshUI();
-            alert("Catalogue mis à jour avec succès !");
+        // --- MENU BURGER ---
+        const burgerMenu = document.getElementById('burgerMenu');
+        const navLinks = document.getElementById('navLinks');
+        burgerMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
         });
 
-        refreshUI();
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('active'));
+        });
+
+        // --- RECHERCHE VOCALE RE-CORRIGÉE ---
+        const voiceBtn = document.getElementById('voiceBtn');
+        const voiceStatus = document.getElementById('voiceStatus');
+
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'fr-FR';
+
+            voiceBtn.addEventListener('click', () => {
+                recognition.start();
+                voiceStatus.innerText = "🎤 Écoute en cours... Dites par exemple 'iPhone 14 Pro' ou 'Sonos'.";
+            });
+
+            recognition.onresult = (event) => {
+                const parole = event.results[0][0].transcript.toLowerCase();
+                voiceStatus.innerText = Recherche appliquée pour : "${event.results[0][0].transcript}";
+                
+                const resultats = articles.filter(art => {
+                    return parole.includes(art.nom.toLowerCase()) || 
+                           art.categorie.split(' ').some(mot => parole.includes(mot));
+                });
+                afficherArticles(resultats);
+            };
+
+            recognition.onerror = () => { voiceStatus.innerText = "⚠️ Échec de la capture vocale. Veuillez réessayer."; };
+        } else {
+            voiceBtn.style.display = 'none';
+            voiceStatus.innerText = "Votre navigateur ne prend pas en charge l'API de reconnaissance vocale.";
+        }
+
+        // --- SÉCURITÉ ADMIN (Mot de passe : Anael2009) ---
+        const productSelect = document.getElementById('productSelect');
+        const adminForm = document.getElementById('adminForm');
+
+        function initAdminPanel() {
+            productSelect.innerHTML = "";
+            articles.forEach(art => {
+                const opt = document.createElement('option');
+                opt.value = art.id; opt.innerText = art.nom;
+                productSelect.appendChild(opt);
+            });
+        }
+
+        adminForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const mdpSaisi = prompt("Accès sécurisé. Entrez le mot de passe administrateur :");
+            if (mdpSaisi !== "Anael2009") {
+                alert("❌ Mot de passe incorrect ! Action annulée.");
+                return;
+            }
+
+            const idSelectionne = parseInt(productSelect.value);
+            const nouveauPrix = parseFloat(document.getElementById('newPrice').value);
+            const nouveauStatut = document.getElementById('newStock').value;
+
+            const article = articles.find(art => art.id === idSelectionne);
+            if (article) {
+                if (!isNaN(nouveauPrix) && nouveauPrix > 0) article.prix = nouveauPrix;
+                article.statut = nouveauStatut;
+                afficherArticles();
+                document.getElementById('newPrice').value = "";
+                alert(✅ Base Mano_GSM mise à jour avec succès pour : ${article.nom});
+            }
+        });
+
+        // Initialisation globale
+        afficherArticles();
+        initAdminPanel();
     </script>
 </body>
 </html>
