@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+Ok<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -104,6 +104,26 @@
             width: 280px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Conteneur d'image fixe pour uniformiser la vitrine */
+        .img-container {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .img-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
 
         .badge-en-stock {
@@ -227,13 +247,13 @@
 
     <div class="hero">
         <h1>Mano-GSM Bénin</h1>
-        <p>Achat et vente de smartphones. Tarifs optimisés avec calcul de marge de 5 %.</p>
+        <p>Achat et vente de smartphones. Tarifs classés par gamme de prix (Marge de 5 % incluse).</p>
     </div>
 
     <div class="container">
         
         <main id="boutique">
-            <h2 style="text-align: center; margin-bottom: 30px;">Nos Articles Disponibles</h2>
+            <h2 style="text-align: center; margin-bottom: 30px;">Nos Articles Disponibles (Classés par Prix)</h2>
             <div class="product-grid" id="productGrid">
                 </div>
         </main>
@@ -266,7 +286,7 @@
 
         <section id="espace-admin" style="background-color: #fff9e6; border-left: 6px solid #fcd116;">
             <h2>Espace Administrateur ⚙️</h2>
-            <p><em>Entrez le prix du marché, le système ajoutera vos 5 % de marge. Le code secret "Anael2009" est requis pour appliquer les changements.</em></p>
+            <p><em>Le système triera automatiquement l'appareil du moins cher au plus cher.</em></p>
             
             <form id="adminForm">
                 <label>Nom du smartphone (Ex: iPhone 15 Pro) :</label>
@@ -277,9 +297,10 @@
                 <input type="number" id="adminPrix" placeholder="Ex: 800000" required>
                 <br><br>
 
-                <label>Nom du fichier image (Ex: iphone15.jpg) :</label>
-                <input type="text" id="adminImage" placeholder="Ex: iphone15.jpg">
-                <br><br>
+                <label>Lien Web (URL) de la vraie photo du téléphone :</label>
+                <input type="url" id="adminImage" placeholder="https://exemple.com/photo-telephone.jpg">
+                <p style="font-size: 0.85em; color: #666; margin-top: 2px;"><em>Astuce : Faites un clic droit sur une image sur le web -> "Copier l'adresse de l'image" et collez-la ici.</em></p>
+                <br>
 
                 <label>Mot de passe Administrateur :</label>
                 <input type="password" id="adminPassword" placeholder="Entrez le mot de passe secret" required>
@@ -317,10 +338,10 @@
         const navLinks = document.getElementById('navLinks');
         burgerBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
 
-        // Données d'exemple de départ
+        // Données initiales avec de vrais liens d'images d'illustration hébergées
         const catalogueDeDepart = [
-            { nom: "iPhone 15 Pro", prix: 840000, statut: "disponible", image: "iphone15.jpg" },
-            { nom: "Samsung Galaxy S24", prix: 735000, statut: "disponible", image: "samsung-s24.jpg" }
+            { nom: "Samsung Galaxy S24", prix: 735000, statut: "disponible", image: "https://images.samsung.com/is/image/samsung/p6pim/fr/2401/gallery/fr-galaxy-s24-sm-s921bzyeexef-539423604" },
+            { nom: "iPhone 15 Pro", prix: 840000, statut: "disponible", image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-1inch-naturaltitanium?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692846360186" }
         ];
 
         let boutiqueStock = JSON.parse(localStorage.getItem('manoGsmFinalStock')) || catalogueDeDepart;
@@ -329,24 +350,36 @@
             const grid = document.getElementById('productGrid');
             grid.innerHTML = "";
 
+            // CLASSEMENT : Tri automatique du moins cher au plus cher (du moins bon au plus bon)
+            boutiqueStock.sort((a, b) => a.prix - b.prix);
+
             boutiqueStock.forEach(prod => {
                 let badge = "";
                 let boutonDesactive = "";
 
                 if (prod.statut === "rupture") {
-                    badge = <span class="badge-rupture">❌ Rupture de stock</span>;
+                    badge = `<span class="badge-rupture">❌ Rupture de stock</span>`;
                     boutonDesactive = "disabled";
                 } else {
-                    badge = <span class="badge-en-stock">✅ Disponible</span>;
+                    badge = `<span class="badge-en-stock">✅ Disponible</span>`;
                 }
+
+                // Utilisation d'un placeholder propre si aucun lien valide n'est fourni
+                let imageSrc = prod.image && prod.image.startsWith('http') ? prod.image : 'https://via.placeholder.com/200x200?text=Pas+d+image';
 
                 grid.innerHTML += `
                     <div class="produit">
-                        <div>${badge}</div>
-                        <img src="${prod.image || 'placeholder.jpg'}" alt="${prod.nom}" width="100%" onerror="this.src='https://via.placeholder.com/200x200?text=Pas+d+image'">
-                        <h3>${prod.nom}</h3>
-                        <p><span class="prix-actuel">${Math.round(prod.prix).toLocaleString()} FCFA</span></p>
-                        <button class="btn-panier" ${boutonDesactive}>${prod.statut === 'rupture' ? 'Indisponible' : 'Ajouter au panier'}</button>
+                        <div>
+                            <div style="margin-top:10px;">${badge}</div>
+                            <div class="img-container">
+                                <img src="${imageSrc}" alt="${prod.nom}" onerror="this.src='https://via.placeholder.com/200x200?text=Image+Non+Valide'">
+                            </div>
+                            <h3>${prod.nom}</h3>
+                        </div>
+                        <div>
+                            <p><span class="prix-actuel">${Math.round(prod.prix).toLocaleString()} FCFA</span></p>
+                            <button class="btn-panier" ${boutonDesactive}>${prod.statut === 'rupture' ? 'Indisponible' : 'Ajouter au panier'}</button>
+                        </div>
                     </div>
                 `;
             });
@@ -366,7 +399,7 @@
             const nom = document.getElementById('adminNom').value.trim();
             const prixMarche = parseInt(document.getElementById('adminPrix').value);
             const prixCalculé = prixMarche * 1.05;
-            const image = document.getElementById('adminImage').value.trim() || "placeholder.jpg";
+            const image = document.getElementById('adminImage').value.trim();
             const statut = document.querySelector('input[name="adminStock"]:checked').value;
 
             const indexExistant = boutiqueStock.findIndex(p => p.nom.toLowerCase() === nom.toLowerCase());
@@ -374,7 +407,7 @@
             if (indexExistant !== -1) {
                 boutiqueStock[indexExistant].prix = prixCalculé;
                 boutiqueStock[indexExistant].statut = statut;
-                if(document.getElementById('adminImage').value.trim() !== "") {
+                if(image !== "") {
                     boutiqueStock[indexExistant].image = image;
                 }
             } else {
@@ -387,7 +420,7 @@
             document.querySelector('input[value="disponible"]').checked = true;
             
             rafraichirVitrine();
-            alert("Mise à jour effectuée avec succès !");
+            alert("Mise à jour effectuée et catalogue trié par prix !");
         });
 
         rafraichirVitrine();
