@@ -151,7 +151,7 @@
             cursor: not-allowed;
         }
 
-        /* Formulaires (Client, Admin, Avis) */
+        /* Formulaires */
         section {
             background: white;
             padding: 25px;
@@ -197,7 +197,15 @@
             background: #111;
             color: white;
             margin-top: 50px;
-            border-top: 5px solid #e8112d; /* Liseré ROUGE */
+            border-top: 5px solid #e8112d;
+        }
+
+        .adresse-boutique {
+            font-style: normal;
+            color: #fcd116;
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
         }
     </style>
 </head>
@@ -219,7 +227,7 @@
 
     <div class="hero">
         <h1>Mano-GSM Bénin</h1>
-        <p>Achat et vente de smartphones. Tarifs optimisés avec calcul de marge transparent de 5 %.</p>
+        <p>Achat et vente de smartphones. Tarifs optimisés avec calcul de marge de 5 %.</p>
     </div>
 
     <div class="container">
@@ -250,7 +258,7 @@
                 <input type="text" placeholder="Ex: Koffi" required>
                 <br><br>
                 <label>Votre Avis :</label>
-                <textarea rows="4" placeholder="Donnez votre avis sur les services de Mano-GSM..." required></textarea>
+                <textarea rows="4" placeholder="Donnez votre avis sur Mano-GSM..." required></textarea>
                 <br><br>
                 <button type="submit" class="btn-panier" style="width: auto;">Publier l'avis</button>
             </form>
@@ -258,19 +266,23 @@
 
         <section id="espace-admin" style="background-color: #fff9e6; border-left: 6px solid #fcd116;">
             <h2>Espace Administrateur ⚙️</h2>
-            <p><em>Entrez le prix constaté sur le marché, l'application calculera et affichera automatiquement le prix public intégrant vos 5 % de marge.</em></p>
+            <p><em>Entrez le prix du marché, le système ajoutera vos 5 % de marge. Le code secret "Anael2009" est requis pour appliquer les changements.</em></p>
             
             <form id="adminForm">
                 <label>Nom du smartphone (Ex: iPhone 15 Pro) :</label>
                 <input type="text" id="adminNom" placeholder="Ex: iPhone 15 Pro" required>
                 <br><br>
                 
-                <label>Prix de base du marché / Prix d'achat (FCFA) :</label>
+                <label>Prix de base du marché (FCFA) :</label>
                 <input type="number" id="adminPrix" placeholder="Ex: 800000" required>
                 <br><br>
 
-                <label>Nom exact du fichier image (Ex: iphone15.jpg) :</label>
+                <label>Nom du fichier image (Ex: iphone15.jpg) :</label>
                 <input type="text" id="adminImage" placeholder="Ex: iphone15.jpg">
+                <br><br>
+
+                <label>Mot de passe Administrateur :</label>
+                <input type="password" id="adminPassword" placeholder="Entrez le mot de passe secret" required>
                 <br><br>
                 
                 <label><strong>État de disponibilité de l'article :</strong></label>
@@ -293,25 +305,26 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 Mano-GSM - Cotonou, Bénin - Tous droits réservés.</p>
+        <p>&copy; 2026 Mano-GSM - Tous droits réservés.</p>
+        <address class="adresse-boutique">
+            📍 Notre adresse : Agla petit à petit 2 à droite, juste après le CEG ENTENTE, en face de l'église évangélique Péniel, Cotonou
+        </address>
     </footer>
 
     <script>
-        // Gestion interactive du Menu Burger
+        // Menu Burger
         const burgerBtn = document.getElementById('burgerBtn');
         const navLinks = document.getElementById('navLinks');
         burgerBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
 
-        // Données d'exemple pré-calculées avec +5%
+        // Données d'exemple de départ
         const catalogueDeDepart = [
             { nom: "iPhone 15 Pro", prix: 840000, statut: "disponible", image: "iphone15.jpg" },
             { nom: "Samsung Galaxy S24", prix: 735000, statut: "disponible", image: "samsung-s24.jpg" }
         ];
 
-        // Lecture du LocalStorage
         let boutiqueStock = JSON.parse(localStorage.getItem('manoGsmFinalStock')) || catalogueDeDepart;
 
-        // Fonction d'affichage de la Vitrine
         function rafraichirVitrine() {
             const grid = document.getElementById('productGrid');
             grid.innerHTML = "";
@@ -339,45 +352,44 @@
             });
         }
 
-        // Enregistrement Administrateur (Calcul de prix et statut manuel)
+        // Enregistrement Administrateur sécurisé
         document.getElementById('adminForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
+            const passwordSaisi = document.getElementById('adminPassword').value;
+            
+            if (passwordSaisi !== "Anael2009") {
+                alert("Mot de passe administrateur incorrect ! Modifications refusées.");
+                return;
+            }
+
             const nom = document.getElementById('adminNom').value.trim();
             const prixMarche = parseInt(document.getElementById('adminPrix').value);
-            
-            // Indexation automatique de la marge de 5%
             const prixCalculé = prixMarche * 1.05;
-
             const image = document.getElementById('adminImage').value.trim() || "placeholder.jpg";
             const statut = document.querySelector('input[name="adminStock"]:checked').value;
 
             const indexExistant = boutiqueStock.findIndex(p => p.nom.toLowerCase() === nom.toLowerCase());
 
             if (indexExistant !== -1) {
-                // Modification d'un appareil existant
                 boutiqueStock[indexExistant].prix = prixCalculé;
                 boutiqueStock[indexExistant].statut = statut;
                 if(document.getElementById('adminImage').value.trim() !== "") {
                     boutiqueStock[indexExistant].image = image;
                 }
             } else {
-                // Création d'une nouvelle fiche produit
                 boutiqueStock.push({ nom, prix: prixCalculé, statut, image });
             }
 
-            // Sauvegarde locale
             localStorage.setItem('manoGsmFinalStock', JSON.stringify(boutiqueStock));
 
-            // Réinitialisation du formulaire admin
             document.getElementById('adminForm').reset();
             document.querySelector('input[value="disponible"]').checked = true;
             
             rafraichirVitrine();
-            alert("Mise à jour effectuée ! Marge de 5% appliquée de manière transparente.");
+            alert("Mise à jour effectuée avec succès !");
         });
 
-        // Premier chargement de la page
         rafraichirVitrine();
     </script>
 </body>
