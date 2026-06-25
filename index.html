@@ -85,26 +85,8 @@
       transition: all 0.3s;
     }
     .nav-links a:hover { background: rgba(255,255,255,0.15); color: var(--jaune); }
-    .nav-panier {
-      background: var(--jaune) !important;
-      color: var(--vert) !important;
-      font-weight: 700 !important;
-      position: relative;
-        }
-    #badge-panier {
-      position: absolute;
-      top: -5px; right: -5px;
-      background: var(--rouge);
-      color: white;
-      border-radius: 50%;
-      width: 18px; height: 18px;
-      font-size: 10px;
-      display: none;
-      align-items: center;
-      justify-content: center;
-    }
 
-    /* BURGER */
+    /* BURGER CONTROLS */
     .burger {
       display: none;
       flex-direction: column;
@@ -120,8 +102,9 @@
       height: 3px;
       background: white;
       border-radius: 3px;
-      transition: all 0.3s;
+      transition: all 0.3s ease;
     }
+    
     .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
     .burger.open span:nth-child(2) { opacity: 0; }
     .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
@@ -135,22 +118,6 @@
       position: relative;
       overflow: hidden;
     }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -60px; right: -60px;
-      width: 250px; height: 250px;
-      background: rgba(252,209,22,0.08);
-      border-radius: 50%;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -40px; left: -40px;
-      width: 180px; height: 180px;
-      background: rgba(232,17,45,0.06);
-      border-radius: 50%;
-    }
     .hero-badge {
       display: inline-block;
       background: rgba(252,209,22,0.15);
@@ -161,506 +128,91 @@
       font-size: 0.75rem;
       font-weight: 600;
       margin-bottom: 18px;
-      letter-spacing: 1px;
     }
-    .hero h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 12px; }
     .hero h1 span { color: var(--jaune); }
     .hero p { font-size: 1rem; opacity: 0.85; max-width: 500px; margin: 0 auto 30px; }
-    .hero-stats {
-      display: flex;
-      justify-content: center;
-      gap: 35px;
-      flex-wrap: wrap;
-      margin-top: 35px;
-    }
-    .stat { text-align: center; }
-    .stat-num { font-size: 1.6rem; font-weight: 900; color: var(--jaune); }
-    .stat-label { font-size: 0.7rem; opacity: 0.7; }
 
     /* ===== RECHERCHE ===== */
-    .recherche-section {
-      background: white;
-      padding: 20px;
-      box-shadow: var(--ombre);
-    }
-    .recherche-inner {
-      max-width: 650px;
-      margin: 0 auto;
+    .recherche-section { background: white; padding: 20px; box-shadow: var(--ombre); }
+    .recherche-inner { max-width: 650px; margin: 0 auto; display: flex; gap: 10px; }
+    .recherche-inner input { flex: 1; padding: 13px 20px; border: 2px solid #e0e0e0; border-radius: 30px; outline: none; font-family: 'Poppins', sans-serif; }
+
+    /* ===== GRILLE PRODUITS ===== */
+    .titre-section { text-align: center; padding: 25px 20px 10px; font-size: 1.5rem; font-weight: 700; color: var(--vert); }
+    .grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; padding: 15px 25px 50px; max-width: 1300px; margin: 0 auto; }
+    
+    .carte { 
+      background: white; 
+      border-radius: 16px; 
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08); 
+      overflow: hidden; 
+      position: relative; 
       display: flex;
-      gap: 10px;
-    }
-    .recherche-inner input {
-      flex: 1;
-      padding: 13px 20px;
-      border: 2px solid #e0e0e0;
-      border-radius: 30px;
-      font-size: 0.9rem;
-      outline: none;
-      font-family: 'Poppins', sans-serif;
-      transition: border 0.3s;
-    }
-      .recherche-inner input:focus { border-color: var(--vert); }
-    .recherche-inner button {
-      padding: 13px 18px;
-      background: var(--vert);
-      color: white;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: all 0.3s;
-    }
-    .recherche-inner button:hover { background: var(--vert2); transform: scale(1.05); }
-
-    /* ===== CATEGORIES ===== */
-    .categories-section {
-      background: white;
-      padding: 12px 20px;
-      border-bottom: 2px solid #eee;
-      position: sticky;
-      top: 68px;
-      z-index: 100;
-    }
-    .categories-inner {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .categories-inner button {
-      padding: 8px 16px;
-      border: 2px solid var(--vert);
-      background: white;
-      color: var(--vert);
-      border-radius: 25px;
-      cursor: pointer;
-      font-size: 0.82rem;
-      font-weight: 600;
-      transition: all 0.3s;
-      font-family: 'Poppins', sans-serif;
-    }
-    .categories-inner button.active,
-    .categories-inner button:hover {
-      background: var(--vert);
-      color: white;
-      box-shadow: 0 4px 12px rgba(0,135,81,0.3);
-    }
-
-    /* ===== TITRE ===== */
-    .titre-section {
-      text-align: center;
-      padding: 25px 20px 10px;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--vert);
-    }
-
-    /* ===== GRILLE ===== */
-    .grille {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-      gap: 18px;
-      padding: 15px 25px 50px;
-      max-width: 1300px;
-      margin: 0 auto;
-    }
-
-    .carte {
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-      overflow: hidden;
-      transition: all 0.3s;
-      position: relative;
-    }
-    .carte:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
-
-    .carte-badge-top {
-      position: absolute;
-      top: 10px; left: 10px;
-      background: var(--rouge);
-      color: white;
-      padding: 3px 10px;
-      border-radius: 10px;
-      font-size: 0.68rem;
-      font-weight: 700;
-      z-index: 2;
-    }
-    .badge-stock {
-      position: absolute;
-      top: 10px; right: 10px;
-      padding: 3px 9px;
-      border-radius: 10px;
-      font-size: 0.68rem;
-      font-weight: 700;
-      z-index: 2;
-    }
-    .badge-dispo { background: #e8f5e9; color: #006400; border: 1px solid #006400; }
-    .badge-epuise { background: #ffebee; color: #cc0000; border: 1px solid #cc0000; }
-
-    .carte-img {
-      width: 100%;
-      height: 190px;
-      object-fit: contain;
-      background: linear-gradient(135deg, #f8f8f8, #efefef);
-      padding: 12px;
-    }
-    .carte-epuisee { opacity: 0.55; filter: grayscale(70%); }
-    .carte-epuisee:hover { transform: none !important; }
-
-    .carte-info { padding: 14px; }
-    .carte-info h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 4px; }
-    .carte-info p { font-size: 0.78rem; color: #888; margin-bottom: 10px; line-height: 1.4; }
-    .carte-footer { display: flex; justify-content: space-between; align-items: center; }
-    .prix { font-size: 1rem; font-weight: 800; color: var(--vert); }
-    .btn-panier {
-      background: var(--vert);
-      color: white;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 0.78rem;
-      font-weight: 600;
-      transition: all 0.3s;
-      font-family: 'Poppins', sans-serif;
-    }
-    .btn-panier:hover { background: var(--jaune); color: var(--vert); }
-    .btn-panier-epuise {
-      background: #ccc !important;
-      color: #888 !important;
-      cursor: not-allowed !important;
-    }
-      /* ===== PANIER MODAL ===== */
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.55);
-      z-index: 2000;
-      justify-content: center;
-      align-items: flex-start;
-      padding-top: 60px;
-    }
-    .overlay.open { display: flex; }
-    .modal {
-      background: white;
-      border-radius: 20px;
-      width: 90%;
-      max-width: 480px;
-      max-height: 80vh;
-      overflow-y: auto;
-      padding: 25px;
-    }
-    .modal h2 {
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: var(--vert);
-      margin-bottom: 18px;
-      display: flex;
+      flex-direction: column;
       justify-content: space-between;
-      align-items: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .btn-fermer {
-      background: none;
-      border: none;
-      font-size: 1.4rem;
-      cursor: pointer;
-      color: #888;
-    }
-    .panier-item {
+    .carte:hover { transform: translateY(-5px); box-shadow: var(--ombre); }
+    
+    .carte-img-container {
+      width: 100%;
+      height: 250px; 
+      background: #fdfdfd;
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 12px 0;
+      justify-content: center;
+      overflow: hidden;
       border-bottom: 1px solid #eee;
     }
-    .panier-item img {
-      width: 55px; height: 55px;
-      object-fit: contain;
-      background: #f5f5f5;
-      border-radius: 10px;
-      padding: 5px;
-    }
-    .panier-item-info { flex: 1; }
-    .panier-item-info h4 { font-size: 0.82rem; font-weight: 600; }
-    .panier-item-info p { font-size: 0.78rem; color: var(--vert); font-weight: 700; }
-    .btn-sup {
-      background: var(--rouge);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 26px; height: 26px;
-      cursor: pointer;
-      font-size: 0.75rem;
-    }
-    .panier-total {
-      background: var(--gris);
-      border-radius: 12px;
-      padding: 14px;
-      margin-top: 14px;
-      text-align: right;
-    }
-    .panier-total strong { font-size: 1.1rem; color: var(--vert); }
-    .btn-commander-panier {
+    .carte-img { width: 100%; height: 100%; object-fit: cover; }
+    
+    .carte-info { padding: 16px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .carte-info h3 { font-size: 1rem; font-weight: 700; color: var(--texte); }
+    .carte-info p { font-size: 0.8rem; color: #666; margin-top: 4px; }
+    .prix { font-size: 1.2rem; font-weight: 800; color: var(--vert); margin-top: 8px; }
+    
+    .btn-commander {
+      display: block;
       width: 100%;
-      padding: 14px;
-      background: var(--vert);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-size: 0.95rem;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 14px;
-      font-family: 'Poppins', sans-serif;
-      transition: all 0.3s;
-    }
-    .btn-commander-panier:hover { background: var(--vert2); }
-    .panier-vide { text-align: center; padding: 30px; color: #888; }
-
-    /* ===== ADMIN MODAL ===== */
-    .admin-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.65);
-      z-index: 3000;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-    .admin-overlay.open { display: flex; }
-    .admin-modal {
-      background: white;
-      border-radius: 20px;
-      width: 100%;
-      max-width: 700px;
-      max-height: 88vh;
-      overflow-y: auto;
-      padding: 30px;
-    }
-    .admin-modal h2 {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: var(--vert);
-      margin-bottom: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .admin-login { text-align: center; padding: 20px 0; }
-    .admin-login p { color: #888; margin-bottom: 20px; }
-    .admin-login input {
-      width: 100%;
-      padding: 13px;
-      border: 2px solid #ddd;
-      border-radius: 12px;
-      font-size: 1rem;
-      margin-bottom: 14px;
-      font-family: 'Poppins', sans-serif;
-      outline: none;
       text-align: center;
-    }
-    .admin-login input:focus { border-color: var(--vert); }
-    .btn-login {
-      width: 100%;
-      padding: 13px;
       background: var(--vert);
       color: white;
-      border: none;
-      border-radius: 12px;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: 'Poppins', sans-serif;
-    }
-    .admin-panel { display: none; }
-    .admin-tabs {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-    .tab-btn {
-      padding: 9px 18px;
-      border: 2px solid var(--vert);
-      background: white;
-      color: var(--vert);
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 0.85rem;
-      font-weight: 600;
-      font-family: 'Poppins', sans-serif;
-      transition: all 0.3s;
-    }
-    .tab-btn.active, .tab-btn:hover { background: var(--vert); color: white; }
-
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-
-    .produit-admin {
-      background: var(--gris);
-      border-radius: 12px;
-      padding: 14px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .produit-admin img {
-      width: 50px; height: 50px;
-      object-fit: contain;
-      background: white;
+      text-decoration: none;
+      padding: 12px;
       border-radius: 8px;
-      padding: 4px;
-    }
-    .produit-admin-info { flex: 1; min-width: 150px; }
-    .produit-admin-info h4 { font-size: 0.85rem; font-weight: 700; }
-    .produit-admin-info .prix-actuel { font-size: 0.8rem; color: var(--vert); font-weight: 600; }
-    .input-prix {
-      padding: 8px 12px;
-      border: 2px solid #ddd;
-      border-radius: 10px;
-      font-size: 0.85rem;
-      width: 130px;
-      font-family: 'Poppins', sans-serif;
-      outline: none;
-    }
-    .input-prix:focus { border-color: var(--vert); }
-    .btn-maj {
-      padding: 8px 14px;
-      background: var(--vert);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 0.8rem;
       font-weight: 600;
-      font-family: 'Poppins', sans-serif;
-    }
-    .toggle-stock {
-      padding: 8px 14px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 0.78rem;
-      font-weight: 700;
-      font-family: 'Poppins', sans-serif;
-      transition: all 0.3s;
-    }
-    .toggle-dispo { background: #e8f5e9; color: #006400; }
-    .toggle-epuise { background: #ffebee; color: #cc0000; }
-
-    /* FORMULAIRE AJOUT PRODUIT */
-    .form-ajout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    .form-ajout input,
-    .form-ajout select,
-    .form-ajout textarea {
-      padding: 11px 14px;
-      border: 2px solid #e0e0e0;
-      border-radius: 10px;
+      margin-top: 15px;
       font-size: 0.85rem;
-      font-family: 'Poppins', sans-serif;
-      outline: none;
-      transition: border 0.3s;
+      transition: background 0.3s;
     }
-      .form-ajout input:focus,
-    .form-ajout select:focus,
-    .form-ajout textarea:focus { border-color: var(--vert); }
-    .form-ajout .full { grid-column: 1 / -1; }
-    .btn-ajouter {
-      grid-column: 1 / -1;
-      padding: 13px;
-      background: var(--vert);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-size: 0.95rem;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: 'Poppins', sans-serif;
-      transition: all 0.3s;
-    }
-    .btn-ajouter:hover { background: var(--vert2); }
+    .btn-commander:hover { background: #25D366; }
 
-    /* COMMANDES ADMIN */
-    .commande-item {
+    /* ===== A PROPOS & DEVELOPPEUR ===== */
+    .apropos { background: white; padding: 50px 20px; text-align: center; }
+    .apropos p { max-width: 600px; margin: 0 auto; color: #555; line-height: 1.6; }
+    
+    .dev-card {
+      margin: 30px auto 0;
+      max-width: 450px;
       background: var(--gris);
+      padding: 20px;
       border-radius: 12px;
-      padding: 14px;
-      margin-bottom: 10px;
       border-left: 4px solid var(--vert);
+      text-align: left;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
-    .commande-item h4 { font-size: 0.88rem; font-weight: 700; color: var(--vert); }
-    .commande-item p { font-size: 0.82rem; color: #555; margin-top: 4px; }
-
-    /* ===== A PROPOS ===== */
-    .apropos {
-      background: white;
-      padding: 50px 20px;
-      text-align: center;
-    }
-    .apropos h2 { font-size: 1.6rem; font-weight: 800; color: var(--vert); margin-bottom: 25px; }
-    .apropos-carte {
-      display: inline-block;
-      background: linear-gradient(135deg, #f0fff7, #e8f5e9);
-      border-radius: 20px;
-      padding: 35px;
-      max-width: 480px;
-      box-shadow: var(--ombre);
-      border: 2px solid rgba(0,135,81,0.15);
-    }
-    .apropos-carte .avatar { font-size: 65px; margin-bottom: 12px; }
-    .apropos-carte h3 { font-size: 1.3rem; font-weight: 800; color: var(--vert); margin-bottom: 4px; }
-    .apropos-carte .titre-dev { font-size: 0.85rem; color: #888; margin-bottom: 18px; }
-    .apropos-infos { background: white; border-radius: 12px; padding: 14px; margin-bottom: 18px; text-align: left; }
-    .apropos-infos p { margin-bottom: 7px; font-size: 0.87rem; color: #333; }
-    .apropos-infos p span { font-weight: 700; color: var(--vert); }
-    .badges { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; }
-    .badge { background: var(--vert); color: white; padding: 5px 13px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; }
+    .dev-card h4 { font-size: 0.95rem; color: var(--vert); font-weight: 700; }
+    .dev-card p { font-size: 0.82rem; color: #666; margin-top: 5px; }
 
     /* ===== CONTACT ===== */
-    .contact {
-      background: linear-gradient(135deg, #005c38, var(--vert));
-      color: white;
-      text-align: center;
-      padding: 50px 20px;
-    }
-    .contact h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 8px; }
-    .contact p { opacity: 0.8; margin-bottom: 25px; font-size: 0.9rem; }
-    .contact-liens { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
-    .contact-liens a {
-      display: inline-block;
-      padding: 13px 22px;
-      border-radius: 30px;
-      font-size: 0.88rem;
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.3s;
-    }
-    .contact-liens a:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
+    .contact { background: linear-gradient(135deg, #005c38, var(--vert)); color: white; text-align: center; padding: 50px 20px; }
+    .contact-liens a { display: inline-block; padding: 14px 24px; border-radius: 30px; margin: 8px; text-decoration: none; font-weight: bold; transition: transform 0.2s; }
+    .contact-liens a:hover { transform: translateY(-3px); }
     .btn-wa { background: #25D366; color: white; }
     .btn-tel1 { background: var(--jaune); color: var(--vert); }
-    .btn-tel2 { background: #FFA500; color: white; }
-    .btn-mail { background: white; color: var(--vert); }
 
-    /* ===== FOOTER ===== */
-    footer {
-      background: #003d25;
-      color: rgba(255,255,255,0.65);
-      text-align: center;
-      padding: 22px 20px;
-      font-size: 0.78rem;
-      line-height: 2;
-    }
+    footer { background: #003d25; color: rgba(255,255,255,0.65); text-align: center; padding: 25px 20px; font-size: 0.8rem; }
     footer strong { color: var(--jaune); }
 
     /* ===== RESPONSIVE ===== */
@@ -669,30 +221,27 @@
       .nav-links {
         position: fixed;
         top: 70px; right: -100%;
-        width: 70%;
+        width: 75%;
         height: calc(100vh - 70px);
         background: var(--vert);
         flex-direction: column;
-        padding: 30px 20px;
-        gap: 15px;
+        padding: 40px 20px;
+        gap: 20px;
         transition: right 0.4s ease;
         box-shadow: -5px 0 15px rgba(0,0,0,0.2);
       }
       .nav-links.open { right: 0; }
-      .nav-links a { font-size: 1rem; padding: 12px 16px; }
-      .hero h1 { font-size: 1.8rem; }
-      .grille { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; padding: 12px; }
-      .form-ajout { grid-template-columns: 1fr; }
-      .form-ajout .full { grid-column: 1; }
+      .nav-links a { font-size: 1.1rem; display: block; text-align: center; width: 100%; }
+      .hero h1 { font-size: 1.9rem; }
+      .grille { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; padding: 15px 12px; }
+      .carte-img-container { height: 190px; }
     }
   </style>
 </head>
 <body>
 
-<!-- BARRE DRAPEAU -->
 <div class="drapeau-bar"></div>
 
-<!-- NAVBAR -->
 <nav>
   <div class="logo-container">
     <div class="logo-icon">MG</div>
@@ -701,512 +250,105 @@
       <span>Téléphones & Accessoires — Bénin</span>
     </div>
   </div>
-
-  <button class="burger" id="burger">
+  
+  <button class="burger" id="burgerBtn">
     <span></span><span></span><span></span>
   </button>
 
   <ul class="nav-links" id="navLinks">
     <li><a href="#">Accueil</a></li>
     <li><a href="#produits">Produits</a></li>
-    <li><a href="#apropos">À propos</a></li>
+    <li><a href="#apropos">À Propos</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#" onclick="ouvrirPanier(event)" class="nav-panier" style="position:relative;">🛒 Panier <span id="badge-panier"></span></a></li>
-    <li><a href="#" onclick="ouvrirAdmin(event)" style="background:rgba(252,209,22,0.2);border-radius:20px;">⚙️ Admin</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-badge">🇧🇯 MANO-GSM — COTONOU, BÉNIN</div>
-  <h1>Votre boutique <span>téléphones</span><br>& accessoires 📱</h1>
-  <p>iPhones, Samsung, vêtements, coques, écouteurs, chargeurs — tout ce qu'il vous faut !</p>
-  <div class="hero-stats">
-    <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Produits</div></div>
-    <div class="stat"><div class="stat-num">🇧🇯</div><div class="stat-label">Made in Bénin</div></div>
-    <div class="stat"><div class="stat-num">24h</div><div class="stat-label">Livraison</div></div>
-  </div>
-</div>
+<section class="hero">
+  <div class="hero-badge">SITE WEB OFFICIEL</div>
+  <h1>Bienvenue chez <span>MANO-GSM</span></h1>
+  <p>Votre partenaire de confiance pour l'achat de smartphones originaux et d'accessoires de qualité supérieure au Bénin.</p>
+</section>
 
-<!-- RECHERCHE -->
-<div class="recherche-section">
+<section class="recherche-section">
   <div class="recherche-inner">
-    <input type="text" id="searchInput" placeholder="🔍 Rechercher iPhone, Samsung, coque...">
-    <button onclick="rechercherProduit()">🔍</button>
+    <input type="text" placeholder="Rechercher un iPhone, Samsung, Infinix, iPad...">
   </div>
-</div>
+</section>
 
-<!-- CATEGORIES -->
-<div class="categories-section" id="produits">
-  <div class="categories-inner">
-    <button class="active" onclick="filtrer('tous', this)">🛍️ Tous</button>
-    <button onclick="filtrer('iphone', this)">🍎 iPhones</button>
-    <button onclick="filtrer('samsung', this)">📱 Samsung</button>
-    <button onclick="filtrer('vetements', this)">👗 Vêtements</button>
-    <button onclick="filtrer('coque', this)">📱 Coques</button>
-    <button onclick="filtrer('ecouteurs', this)">🎧 Écouteurs</button>
-    <button onclick="filtrer('chargeur', this)">🔌 Chargeurs</button>
-    <button onclick="filtrer('accessoire', this)">🛒 Accessoires</button>
-  </div>
-</div>
+<div class="titre-section" id="produits">Nos Articles Disponibles</div>
 
-<h2 class="titre-section" id="titreSection">Tous les produits</h2>
-<div class="grille" id="grille"></div>
-    <!-- A PROPOS -->
-<div class="apropos" id="apropos">
-  <h2>👤 À propos</h2>
-  <div class="apropos-carte">
-    <div class="avatar">👨‍💻</div>
-    <h3>DESSOUASSI Anael</h3>
-    <div class="titre-dev">Fondateur — Mano-GSM & Vocal Commerce BJ</div>
-    <div class="apropos-infos">
-      <p>🏪 <span>Boutique :</span> Mano-GSM</p>
-      <p>📍 <span>Adresse :</span> Agla Petit à Petit 2, après CEG Entente, Cotonou</p>
-      <p>📞 <span>Tél Boutique :</span> 01 91 74 71 71</p>
-      <p>💳 <span>MoMo :</span> 01 91 74 71 71</p>
-      <p>─────────────────────</p>
-      <p>👨‍💻 <span>Développeur :</span> DESSOUASSI Anael</p>
-      <p>📞 <span>Tél Dev :</span> 0140109306</p>
-      <p>✉️ <span>Email :</span> dessouassianael51@gmail.com</p>
-      <p>🇧🇯 <span>Pays :</span> Bénin</p>
+<section class="grille">
+  <div class="carte">
+    <div class="carte-img-container">
+      <img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&q=80" class="carte-img" alt="Photo réelle iPhone 15 Pro Max">
     </div>
-    <div class="badges">
-      <span class="badge">🇧🇯 Bénin</span>
-      <span class="badge">📱 GSM</span>
-      <span class="badge">💡 Tech</span>
-      <span class="badge">🛒 E-commerce</span>
+    <div class="carte-info">
+      <div>
+        <h3>iPhone 15 Pro Max</h3>
+        <p>État neuf, 256 Go, Batterie 100%, Zéro égratignure.</p>
+      </div>
+      <div>
+        <div class="prix">650 000 FCFA</div>
+        <a href="https://wa.me/2290191747171?text=Bonjour%20Mano-GSM,%20je%20souhaite%20commander%20l'iPhone%2015%20Pro%20Max." class="btn-commander" target="_blank">🛒 Commander via WhatsApp</a>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- CONTACT -->
-<div class="contact" id="contact">
-  <h2>📞 Contactez-nous</h2>
-  <p>Disponible 7j/7 pour vos commandes</p>
+  <div class="carte">
+    <div class="carte-img-container">
+      <img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&q=80" class="carte-img" alt="Photo réelle Samsung S24 Ultra">
+    </div>
+    <div class="carte-info">
+      <div>
+        <h3>Samsung Galaxy S24 Ultra</h3>
+        <p>Original scellé en boîte, Garantie constructeur 24 mois.</p>
+      </div>
+      <div>
+        <div class="prix">750 000 FCFA</div>
+        <a href="https://wa.me/2290191747171?text=Bonjour%20Mano-GSM,%20je%20souhaite%20commander%20le%20Samsung%20Galaxy%20S24%20Ultra." class="btn-commander" target="_blank">🛒 Commander via WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="apropos" id="apropos">
+  <h2>À propos de Mano-GSM</h2>
+  <p style="margin-top: 15px;">Mano-GSM est votre boutique officielle spécialisée dans l'importation et la vente de téléphones haut de gamme et d'accessoires d'origine au Bénin. Nous mettons un point d'honneur sur l'authenticité de nos produits et la qualité du service.</p>
+  
+  <div class="dev-card">
+    <h4>💻 Informations Conception</h4>
+    <p>Ce site officiel a été développé sur-mesure pour Mano-GSM. Interface optimisée pour une navigation fluide et un accès rapide aux commandes directes WhatsApp.</p>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <h2>Contactez la Boutique Officielle</h2>
+  <p>Une question ou besoin d'une livraison rapide ? Notre équipe vous répond immédiatement.</p>
   <div class="contact-liens">
-    <a href="https://wa.me/22901917471" class="btn-wa" target="_blank">💬 WhatsApp Boutique</a>
-    <a href="tel:+22901917471" class="btn-tel1">📞 01 91 74 71 71</a>
-    <a href="mailto:dessouassianael51@gmail.com" class="btn-mail">✉️ Email</a>
+    <a href="https://wa.me/2290191747171" class="btn-wa" target="_blank">💬 WhatsApp : +229 01 91 74 71 71</a>
+    <a href="tel:+2290191747171" class="btn-tel1">📞 Appeler le Service Client</a>
   </div>
+</section>
 
-  <!-- ADRESSE -->
-  <div style="margin-top:30px;background:rgba(255,255,255,0.1);border-radius:16px;padding:20px;max-width:500px;margin:30px auto 0;">
-    <h3 style="color:var(--jaune);font-size:1.1rem;margin-bottom:12px;">📍 Notre adresse</h3>
-    <p style="font-size:0.88rem;line-height:1.8;opacity:0.9;">
-      Agla Petit à Petit 2, à droite<br>
-      Juste après le <strong style="color:var(--jaune);">CEG ENTENTE</strong><br>
-      En face de l'église évangélique Péniel<br>
-      <strong style="color:var(--jaune);">Cotonou, Bénin 🇧🇯</strong>
-    </p>
-  </div>
-
-  <!-- PAIEMENT MOMO -->
-  <div style="margin-top:25px;background:rgba(252,209,22,0.15);border:2px solid rgba(252,209,22,0.4);border-radius:16px;padding:20px;max-width:500px;margin:25px auto 0;">
-    <h3 style="color:var(--jaune);font-size:1.1rem;margin-bottom:12px;">💳 Paiement Mobile Money</h3>
-    <p style="font-size:0.88rem;opacity:0.9;margin-bottom:15px;">
-      Payez facilement via MTN MoMo ou Moov Money
-    </p>
-    <div style="display:flex;flex-direction:column;gap:10px;align-items:center;">
-      <div style="background:var(--jaune);color:#006400;padding:14px 25px;border-radius:12px;font-weight:800;font-size:1rem;width:100%;max-width:300px;text-align:center;">
-        📱 MTN MoMo<br>
-        <span style="font-size:1.3rem;letter-spacing:2px;">01 91 74 71 71</span>
-      </div>
-      <div style="background:#0066cc;color:white;padding:14px 25px;border-radius:12px;font-weight:800;font-size:1rem;width:100%;max-width:300px;text-align:center;">
-        📱 Moov Money<br>
-        <span style="font-size:1.3rem;letter-spacing:2px;">01 91 74 71 71</span>
-      </div>
-    </div>
-    <p style="font-size:0.78rem;opacity:0.7;margin-top:12px;">
-      ✅ Après paiement, envoyez la capture à notre WhatsApp pour confirmation
-    </p>
-  </div>
-</div>
-
-<!-- FOOTER -->
 <footer>
-  <strong>© 2026 Mano-GSM</strong> — Téléphones & Accessoires — Cotonou, Bénin 🇧🇯<br>
-  📍 Agla Petit à Petit 2, après CEG Entente, en face église Péniel, Cotonou<br>
-  📞 Boutique : <strong>01 91 74 71 71</strong> | 💳 MoMo : <strong>01 91 74 71 71</strong><br>
-  ─────────────────────────────────────<br>
-  👨‍💻 Développé par <strong>DESSOUASSI Anael</strong> — 📞 <strong>0140109306</strong> | ✉️ dessouassianael51@gmail.com
+  <p>© 2026 <strong>Mano-GSM Bénin</strong> - Site Web Officiel. Tous droits réservés.</p>
 </footer>
-
-<!-- PANIER OVERLAY -->
-<div class="overlay" id="panierOverlay">
-  <div class="modal">
-    <h2>🛒 Mon Panier <button class="btn-fermer" onclick="fermerPanier()">✕</button></h2>
-    <div id="panier-contenu"></div>
-  </div>
-</div>
-
-<!-- ADMIN OVERLAY -->
-<div class="admin-overlay" id="adminOverlay">
-  <div class="admin-modal">
-    <h2>⚙️ Espace Admin <button class="btn-fermer" onclick="fermerAdmin()">✕</button></h2>
-
-    <div class="admin-login" id="adminLogin">
-      <p>Entrez le mot de passe administrateur</p>
-      <input type="password" id="adminPassword" placeholder="Mot de passe...">
-      <button class="btn-login" onclick="connecterAdmin()">🔐 Se connecter</button>
-    </div>
-
-    <div class="admin-panel" id="adminPanel">
-      <div class="admin-tabs">
-        <button class="tab-btn active" onclick="switchTab('tab-prix', this)">💰 Modifier les prix</button>
-        <button class="tab-btn" onclick="switchTab('tab-stock', this)">📦 Gérer le stock</button>
-        <button class="tab-btn" onclick="switchTab('tab-ajouter', this)">➕ Ajouter un produit</button>
-        <button class="tab-btn" onclick="switchTab('tab-commandes', this)">📋 Commandes</button>
-      </div>
-
-      <!-- TAB PRIX -->
-      <div class="tab-content active" id="tab-prix">
-        <h3 style="color:var(--vert);margin-bottom:15px;">💰 Modifier les prix</h3>
-        <div id="liste-prix"></div>
-      </div>
-
-      <!-- TAB STOCK -->
-      <div class="tab-content" id="tab-stock">
-        <h3 style="color:var(--vert);margin-bottom:15px;">📦 Disponibilité des produits</h3>
-        <div id="liste-stock"></div>
-      </div>
-
-      <!-- TAB AJOUTER -->
-      <div class="tab-content" id="tab-ajouter">
-        <h3 style="color:var(--vert);margin-bottom:15px;">➕ Ajouter un nouveau produit</h3>
-        <div class="form-ajout">
-          <input type="text" id="new-nom" placeholder="Nom du produit *">
-          <input type="number" id="new-prix" placeholder="Prix en FCFA *">
-          <select id="new-categorie">
-            <option value="">-- Catégorie --</option>
-            <option value="iphone">🍎 iPhone</option>
-            <option value="samsung">📱 Samsung</option>
-            <option value="vetements">👗 Vêtements</option>
-            <option value="coque">📱 Coque</option>
-            <option value="ecouteurs">🎧 Écouteurs</option>
-            <option value="chargeur">🔌 Chargeur</option>
-            <option value="accessoire">🛒 Accessoire</option>
-          </select>
-          <input type="text" id="new-badge" placeholder="Badge (ex: Nouveau, Top...)">
-          <input type="text" class="full" id="new-img" placeholder="Lien image URL (optionnel)">
-          <input type="text" class="full" id="new-desc" placeholder="Description du produit *">
-          <button class="btn-ajouter" onclick="ajouterProduit()">➕ Ajouter le produit</button>
-        </div>
-      </div>
-
-      <!-- TAB COMMANDES -->
-      <div class="tab-content" id="tab-commandes">
-        <h3 style="color:var(--vert);margin-bottom:15px;">📋 Commandes reçues</h3>
-        <div id="liste-commandes"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script>
-  // ===== PRODUITS =====
-  let produits = [
-    // iPhones
-    { id: 1, nom: "iPhone 11", prix: 125000, categorie: "iphone", img: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-11-black-select-2019?wid=300&hei=300&fmt=png-alpha", desc: "64Go, Face ID, Double caméra", badge: "Occasion", stock: true },
-    { id: 2, nom: "iPhone 12", prix: 145000, categorie: "iphone", img: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-12-black-select-2020?wid=300&hei=300&fmt=png-alpha", desc: "64Go, 5G, OLED Super Retina", badge: "", stock: true },
-    { id: 3, nom: "iPhone 13", prix: 175000, categorie: "iphone", img: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-black-select-2021?wid=300&hei=300&fmt=png-alpha", desc: "128Go, Puce A15, Cinematic", badge: "", stock: true },
-    { id: 4, nom: "iPhone 14", prix: 240000, categorie: "iphone", img: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-black-select-202209?wid=300&hei=300&fmt=png-alpha", desc: "128Go, Mode Action", badge: "", stock: true },
-    { id: 5, nom: "iPhone 14 Pro", prix: 330000, categorie: "iphone", img: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-pro-spacenoir-select?wid=300&hei=300&fmt=png-alpha", desc: "128Go, Dynamic Island, 48MP", badge: "Pro", stock: true },
-    { id: 6, nom: "iPhone 15", prix: 275000, categorie: "iphone", img: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-black-select-202309?wid=300&hei=300&fmt=png-alpha", desc: "128Go, USB-C, Puce A16", badge: "", stock: true },
-    { id: 7, nom: "iPhone 16", prix: 480000, categorie: "iphone", img: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-black-select-202409?wid=300&hei=300&fmt=png-alpha", desc: "128Go, Puce A18", badge: "Nouveau", stock: true },
-    { id: 8, nom: "iPhone 17 Pro", prix: 650000, categorie: "iphone", img: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-black-select-202409?wid=300&hei=300&fmt=png-alpha", desc: "256Go, Titane, Caméra 5x", badge: "Top", stock: true },
-    // Samsung
-    { id: 9, nom: "Samsung Galaxy S24", prix: 380000, categorie: "samsung", img: "https://images.samsung.com/is/image/samsung/p6pim/africa_fr/2401/gallery/africa-fr-galaxy-s24-s921-sm-s921bzkaeub-thumb-539287259?$UX_ROOT_THUMBNAIL$", desc: "6.2 pouces, 128Go, IA intégrée", badge: "Nouveau", stock: true },
-    { id: 10, nom: "Samsung Galaxy A55", prix: 185000, categorie: "samsung", img: "https://images.samsung.com/is/image/samsung/p6pim/africa_fr/2404/gallery/africa-fr-galaxy-a55-5g-sm-a556-sm-a556ezkaeub-thumb-539418135?$UX_ROOT_THUMBNAIL$", desc: "6.6 pouces, 128Go, 5G", badge: "", stock: true },
-    { id: 11, nom: "Samsung Galaxy A35", prix: 145000, categorie: "samsung", img: "https://images.samsung.com/is/image/samsung/p6pim/africa_fr/2403/gallery/africa-fr-galaxy-a35-5g-sm-a356-sm-a356ezkaeub-thumb-539287334?$UX_ROOT_THUMBNAIL$", desc: "6.6 pouces, 128Go, Triple caméra", badge: "", stock: true },
-    { id: 12, nom: "Samsung Galaxy S23 FE", prix: 280000, categorie: "samsung", img: "https://images.samsung.com/is/image/samsung/p6pim/africa_fr/2310/gallery/africa-fr-galaxy-s23-fe-s711-sm-s711bzadeub-thumb-537965294?$UX_ROOT_THUMBNAIL$", desc: "6.4 pouces, 128Go, 50MP", badge: "", stock: false },
-    // Vêtements
-    { id: 13, nom: "T-shirt Mano-GSM", prix: 5000, categorie: "vetements", img: "https://via.placeholder.com/300x300/008751/ffffff?text=T-Shirt+MG", desc: "T-shirt coton, toutes tailles", badge: "Local", stock: true },
-    { id: 14, nom: "Casquette Mano-GSM", prix: 3500, categorie: "vetements", img: "https://via.placeholder.com/300x300/FCD116/000000?text=Casquette+MG", desc: "Casquette tendance, ajustable", badge: "", stock: true },
-    { id: 15, nom: "Hoodie Tech", prix: 12000, categorie: "vetements", img: "https://via.placeholder.com/300x300/E8112D/ffffff?text=Hoodie+Tech", desc: "Sweat à capuche, coton premium", badge: "", stock: true },
-    // Coques
-    { id: 16, nom: "Coque iPhone 15 Pro", prix: 3500, categorie: "coque", img: "https://via.placeholder.com/300x300/f0f0f0/333?text=Coque+iPhone+15", desc: "Coque incassable antichoc", badge: "Incassable", stock: true },
-    { id: 17, nom: "Coque iPhone 14", prix: 3000, categorie: "coque", img: "https://via.placeholder.com/300x300/f0f0f0/333?text=Coque+iPhone+14", desc: "Coque silicone premium", badge: "", stock: true },
-    { id: 18, nom: "Coque Samsung A55", prix: 2500, categorie: "coque", img: "https://via.placeholder.com/300x300/f0f0f0/333?text=Coque+A55", desc: "Coque transparente renforcée", badge: "", stock: true },
-    { id: 19, nom: "Coque universelle incassable", prix: 4000, categorie: "coque", img: "https://via.placeholder.com/300x300/333/fff?text=Incassable", desc: "Protection maximale 360°", badge: "Incassable", stock: true },
-    // Écouteurs
-    { id: 20, nom: "AirPods Pro 2", prix: 85000, categorie: "ecouteurs", img: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MQD83?wid=300&hei=300&fmt=png-alpha", desc: "Réduction bruit active, USB-C", badge: "Top", stock: true },
-    { id: 21, nom: "Samsung Galaxy Buds2", prix: 45000, categorie: "ecouteurs", img: "https://images.samsung.com/is/image/samsung/p6pim/africa_fr/sm-r177nzaaeub/gallery/africa-fr-galaxy-buds2-sm-r177-sm-r177nzaaeub-thumb-531638592?$UX_ROOT_THUMBNAIL$", desc: "Réduction bruit, 29h autonomie", badge: "", stock: true },
-    { id: 22, nom: "Écouteurs filaires iPhone", prix: 8000, categorie: "ecouteurs", img: "https://via.placeholder.com/300x300/f0f0f0/333?text=EarPods", desc: "Lightning, compatible iPhone", badge: "", stock: true },
-    { id: 23, nom: "Écouteurs Bluetooth Sport", prix: 15000, categorie: "ecouteurs", img: "https://via.placeholder.com/300x300/008751/fff?text=BT+Sport", desc: "Sans fil, waterproof, 8h", badge: "", stock: false },
-    // Chargeurs
-    { id: 24, nom: "Chargeur iPhone 20W", prix: 8500, categorie: "chargeur", img: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MHJA3?wid=300&hei=300&fmt=png-alpha", desc: "Charge rapide USB-C, original", badge: "Original", stock: true },
-    { id: 25, nom: "Chargeur Samsung 25W", prix: 7000, categorie: "chargeur", img: "https://images.samsung.com/is/image/samsung/p6pim/africa_fr/ep-ta800nbeggb/gallery/africa-fr-25w-super-fast-charging-ep-ta800-ep-ta800nbeggb-thumb-365499964?$UX_ROOT_THUMBNAIL$", desc: "Super Fast Charging Samsung", badge: "", stock: true },
-    { id: 26, nom: "Câble USB-C vers Lightning", prix: 4500, categorie: "chargeur", img: "https://via.placeholder.com/300x300/f0f0f0/333?text=Cable+USB-C", desc: "Compatible iPhone, charge rapide", badge: "", stock: true },
-    { id: 27, nom: "Chargeur sans fil 15W", prix: 12000, categorie: "chargeur", img: "https://via.placeholder.com/300x300/333/fff?text=Wireless+15W", desc: "Compatible MagSafe & Android", badge: "Nouveau", stock: true },
-    // Accessoires
-    { id: 28, nom: "Verre trempé iPhone 15", prix: 2500, categorie: "accessoire", img: "https://via.placeholder.com/300x300/f0f0f0/333?text=Verre+Trempe", desc: "Protection écran 9H anti-rayures", badge: "", stock: true },
-    { id: 29, nom: "Support voiture magnétique", prix: 6000, categorie: "accessoire", img: "https://via.placeholder.com/300x300/333/fff?text=Support+Voiture", desc: "Magnétique, 360°, universel", badge: "", stock: true },
-    { id: 30, nom: "Batterie externe 20000mAh", prix: 18000, categorie: "accessoire", img: "https://via.placeholder.com/300x300/008751/fff?text=Power+Bank", desc: "Charge 3 appareils simultanément", badge: "Top", stock: true },
-  ];
+  const burgerBtn = document.getElementById('burgerBtn');
+  const navLinks = document.getElementById('navLinks');
 
-  let panier = [];
-  let commandes = JSON.parse(localStorage.getItem('commandes_mano') || '[]');
-
-  // ===== AFFICHAGE =====
-  function afficherProduits(liste) {
-    const grille = document.getElementById('grille');
-    grille.innerHTML = '';
-    if (liste.length === 0) {
-      grille.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:40px;color:#888;">Aucun produit trouvé.</p>';
-      return;
-    }
-    const tries = [...liste].sort((a, b) => b.stock - a.stock);
-    tries.forEach(p => {
-      const epuise = !p.stock;
-      grille.innerHTML += `
-        <div class="carte ${epuise ? 'carte-epuisee' : ''}">
-          ${p.badge ? <div class="carte-badge-top">${p.badge}</div> : ''}
-          <div class="badge-stock ${epuise ? 'badge-epuise' : 'badge-dispo'}">
-            ${epuise ? '❌ Épuisé' : '✅ Dispo'}
-          </div>
-          <img class="carte-img" src="${p.img}" alt="${p.nom}" onerror="this.src='https://via.placeholder.com/300x200?text=${encodeURIComponent(p.nom)}'">
-          <div class="carte-info">
-            <h3>${p.nom}</h3>
-            <p>${p.desc}</p>
-            <div class="carte-footer">
-              <div class="prix">${p.prix.toLocaleString()} FCFA</div>
-              ${epuise
-                ? <button class="btn-panier btn-panier-epuise" disabled>Épuisé</button>
-                : <button class="btn-panier" onclick="ajouterPanier(${p.id})">🛒 Ajouter</button>}
-            </div>
-          </div>
-        </div>`;
-    });
-  }
-
-  // ===== FILTRAGE =====
-  function filtrer(cat, btn) {
-    document.querySelectorAll('.categories-inner button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const titres = {
-      tous: "Tous les produits",
-      iphone: "🍎 iPhones",
-      samsung: "📱 Samsung",
-      vetements: "👗 Vêtements",
-      coque: "📱 Coques de téléphone",
-      ecouteurs: "🎧 Écouteurs",
-      chargeur: "🔌 Chargeurs",
-      accessoire: "🛒 Accessoires"
-    };
-    document.getElementById('titreSection').textContent = titres[cat];
-    const res = cat === 'tous' ? produits : produits.filter(p => p.categorie === cat);
-    afficherProduits(res);
-  }
-
-  // ===== RECHERCHE =====
-  function rechercherProduit() {
-    const terme = document.getElementById('searchInput').value.toLowerCase();
-    const res = produits.filter(p => p.nom.toLowerCase().includes(terme) || p.desc.toLowerCase().includes(terme));
-    document.getElementById('titreSection').textContent = 'Résultats pour "' + terme + '"';
-    afficherProduits(res);
-  }
-  document.getElementById('searchInput').addEventListener('keyup', e => {
-    if (e.key === 'Enter') rechercherProduit();
+  burgerBtn.addEventListener('click', () => {
+    burgerBtn.classList.toggle('open');
+    navLinks.classList.toggle('open');
   });
 
-  // ===== PANIER =====
-  function ajouterPanier(id) {
-    const p = produits.find(x => x.id === id);
-    if (!p || !p.stock) return;
-    const existe = panier.find(x => x.id === id);
-    if (existe) existe.qte++;
-    else panier.push({ ...p, qte: 1 });
-    mettreAJourBadge();
-    notif('✅ ' + p.nom + ' ajouté au panier !');
-  }
-
-  function mettreAJourBadge() {
-    const total = panier.reduce((s, p) => s + p.qte, 0);
-    const badge = document.getElementById('badge-panier');
-    badge.textContent = total;
-    badge.style.display = total > 0 ? 'flex' : 'none';
-  }
-
-  function notif(msg) {
-    const n = document.createElement('div');
-    n.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#008751;color:white;padding:12px 20px;border-radius:12px;font-family:Poppins,sans-serif;font-size:0.82rem;z-index:9999;box-shadow:0 4px 15px rgba(0,0,0,0.2);';
-    n.textContent = msg;
-    document.body.appendChild(n);
-    setTimeout(() => n.remove(), 2500);
-  }
-
-  function ouvrirPanier(e) {
-    e.preventDefault();
-    document.getElementById('panierOverlay').classList.add('open');
-    afficherPanier();
-  }
-  function fermerPanier() { document.getElementById('panierOverlay').classList.remove('open'); }
-
-  function afficherPanier() {
-    const c = document.getElementById('panier-contenu');
-    if (panier.length === 0) { c.innerHTML = '<div class="panier-vide">🛒 Panier vide</div>'; return; }
-    let html = '';
-    let total = 0;
-    panier.forEach((p, i) => {
-      total += p.prix * p.qte;
-      html += `<div class="panier-item">
-        <img src="${p.img}" onerror="this.src='https://via.placeholder.com/55'">
-        <div class="panier-item-info"><h4>${p.nom}</h4><p>${(p.prix * p.qte).toLocaleString()} FCFA (x${p.qte})</p></div>
-        <button class="btn-sup" onclick="supprimerPanier(${i})">✕</button>
-      </div>`;
-    });
-    html += `<div class="panier-total">Total : <strong>${total.toLocaleString()} FCFA</strong></div>
-             <button class="btn-commander-panier" onclick="passerCommande()">✅ Commander maintenant</button>`;
-    c.innerHTML = html;
-  }
-
-  function supprimerPanier(i) { panier.splice(i, 1); mettreAJourBadge(); afficherPanier(); }
-
-  function passerCommande() {
-    if (!panier.length) return;
-    const total = panier.reduce((s, p) => s + p.prix * p.qte, 0);
-    const articles = panier.map(p => p.nom + ' x' + p.qte).join(', ');
-    commandes.push({ id: Date.now(), date: new Date().toLocaleString('fr-FR'), articles, total, statut: 'En attente' });
-    localStorage.setItem('commandes_mano', JSON.stringify(commandes));
-    panier = [];
-    mettreAJourBadge();
-    fermerPanier();
-    alert('✅ Commande reçue !\n\nArticles : ' + articles + '\nTotal : ' + total.toLocaleString() + ' FCFA\n\n💳 PAIEMENT MOBILE
-          a.addEventListener('click', () => {
-      burger.classList.remove('open');
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      burgerBtn.classList.remove('open');
       navLinks.classList.remove('open');
     });
   });
-
-  // ===== ADMIN =====
-  function ouvrirAdmin(e) {
-    e.preventDefault();
-    document.getElementById('adminOverlay').classList.add('open');
-    document.getElementById('adminLogin').style.display = 'block';
-    document.getElementById('adminPanel').style.display = 'none';
-    document.getElementById('adminPassword').value = '';
-  }
-  function fermerAdmin() { document.getElementById('adminOverlay').classList.remove('open'); }
-
-  function connecterAdmin() {
-    if (document.getElementById('adminPassword').value === 'Anael2009') {
-      document.getElementById('adminLogin').style.display = 'none';
-      document.getElementById('adminPanel').style.display = 'block';
-      chargerAdmin();
-    } else {
-      alert('❌ Mot de passe incorrect !');
-    }
-  }
-
-  function switchTab(id, btn) {
-    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    btn.classList.add('active');
-  }
-
-  function chargerAdmin() {
-    // PRIX
-    const lp = document.getElementById('liste-prix');
-    lp.innerHTML = produits.map(p => `
-      <div class="produit-admin">
-        <img src="${p.img}" onerror="this.src='https://via.placeholder.com/50'">
-        <div class="produit-admin-info">
-          <h4>${p.nom}</h4>
-          <div class="prix-actuel">${p.prix.toLocaleString()} FCFA</div>
-        </div>
-        <input class="input-prix" type="number" value="${p.prix}" id="prix-${p.id}" placeholder="Nouveau prix">
-        <button class="btn-maj" onclick="majPrix(${p.id})">✅ Mettre à jour</button>
-      </div>`).join('');
-
-    // STOCK
-    const ls = document.getElementById('liste-stock');
-    ls.innerHTML = produits.map(p => `
-      <div class="produit-admin">
-        <img src="${p.img}" onerror="this.src='https://via.placeholder.com/50'">
-        <div class="produit-admin-info">
-          <h4>${p.nom}</h4>
-          <div class="prix-actuel">${p.prix.toLocaleString()} FCFA</div>
-        </div>
-        <button class="toggle-stock ${p.stock ? 'toggle-dispo' : 'toggle-epuise'}" onclick="toggleStock(${p.id})">
-          ${p.stock ? '✅ Disponible' : '❌ Épuisé'}
-        </button>
-      </div>`).join('');
-
-    // COMMANDES
-    const lc = document.getElementById('liste-commandes');
-    lc.innerHTML = commandes.length === 0
-      ? '<p style="color:#888;text-align:center;">Aucune commande.</p>'
-      : commandes.map(c => `
-        <div class="commande-item">
-          <h4>Commande #${c.id}</h4>
-          <p>📅 ${c.date}</p>
-          <p>🛒 ${c.articles}</p>
-          <p>💰 <strong>${c.total.toLocaleString()} FCFA</strong></p>
-        </div>`).join('');
-  }
-
-  function majPrix(id) {
-    const p = produits.find(x => x.id === id);
-    const nouveauPrix = parseInt(document.getElementById('prix-' + id).value);
-    if (!nouveauPrix || nouveauPrix <= 0) { alert('Prix invalide !'); return; }
-    p.prix = nouveauPrix;
-    afficherProduits(produits);
-    chargerAdmin();
-    notif('✅ Prix de ' + p.nom + ' mis à jour !');
-  }
-
-  function toggleStock(id) {
-    const p = produits.find(x => x.id === id);
-    p.stock = !p.stock;
-    afficherProduits(produits);
-    chargerAdmin();
-    notif((p.stock ? '✅ ' : '❌ ') + p.nom + ' : ' + (p.stock ? 'Disponible' : 'Épuisé'));
-  }
-
-  function ajouterProduit() {
-    const nom = document.getElementById('new-nom').value.trim();
-    const prix = parseInt(document.getElementById('new-prix').value);
-    const cat = document.getElementById('new-categorie').value;
-    const desc = document.getElementById('new-desc').value.trim();
-    const badge = document.getElementById('new-badge').value.trim();
-    const img = document.getElementById('new-img').value.trim();
-    if (!nom || !prix || !cat || !desc) { alert('Remplissez tous les champs obligatoires !'); return; }
-    const newId = Math.max(...produits.map(p => p.id)) + 1;
-    produits.push({
-      id: newId, nom, prix, categorie: cat,
-      img: img || https://via.placeholder.com/300x300/008751/fff?text=${encodeURIComponent(nom)},
-      desc, badge, stock: true
-    });
-    document.getElementById('new-nom').value = '';
-    document.getElementById('new-prix').value = '';
-    document.getElementById('new-categorie').value = '';
-    document.getElementById('new-desc').value = '';
-    document.getElementById('new-badge').value = '';
-    document.getElementById('new-img').value = '';
-    afficherProduits(produits);
-    chargerAdmin();
-    notif('✅ ' + nom + ' ajouté avec succès !');
-  }
-
-  // Fermer en cliquant dehors
-  document.getElementById('panierOverlay').addEventListener('click', e => {
-    if (e.target.id === 'panierOverlay') fermerPanier();
-  });
-  document.getElementById('adminOverlay').addEventListener('click', e => {
-    if (e.target.id === 'adminOverlay') fermerAdmin();
-  });
-  document.getElementById('adminPassword').addEventListener('keyup', e => {
-    if (e.key === 'Enter') connecterAdmin();
-  });
-
-  // ===== INIT =====
-  afficherProduits(produits);
 </script>
 
 </body>
-<U
-          
-    
-      
-        
+</html>
